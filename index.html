@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Light Bulb Toggle</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e8d5a5;
+    overflow: hidden;
+    transition: background 0.4s;
+}
+
+body.off {
+    background: #292929;
+}
+
+.scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(-10px);
+}
+
+.bulb {
+    width: 180px;
+    height: 220px;
+    overflow: visible;
+}
+
+.glass {
+    fill: #e4f2a5;
+    stroke: #171717;
+    stroke-width: 5;
+    transition: fill 0.4s, filter 0.4s;
+}
+
+body.off .glass {
+    fill: #777777;
+    filter: none;
+}
+
+body.on .glass {
+    filter: drop-shadow(0 0 25px #fff7a0);
+}
+
+.base {
+    fill: #999999;
+    stroke: #171717;
+    stroke-width: 4;
+}
+
+.filament {
+    fill: none;
+    stroke: #fffde0;
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+
+body.off .filament {
+    opacity: 0.1;
+}
+
+.pull {
+    width: 60px;
+    height: 145px;
+    margin-top: -2px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.string {
+    width: 4px;
+    height: 125px;
+    background: #292018;
+}
+
+.knob {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #eeeeee;
+    border: 2px solid #777;
+}
+
+.pull:active {
+    transform: translateY(7px);
+}
+
+.hint {
+    margin-top: 15px;
+    font: 14px Arial, sans-serif;
+    color: #66583e;
+}
+
+body.off .hint {
+    color: #eeeeee;
+}
+</style>
+</head>
+
+<body class="on">
+
+<div class="scene">
+
+    <svg class="bulb" viewBox="0 0 180 220"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <path class="glass"
+        d="M90 8
+           C43 8 16 43 16 85
+           C16 115 34 135 51 155
+           C59 164 61 176 61 180
+           L119 180
+           C119 176 121 164 129 155
+           C146 135 164 115 164 85
+           C164 43 137 8 90 8Z"/>
+
+        <path class="base"
+        d="M61 177 L119 177 L119 224
+           Q90 246 61 224Z"/>
+
+        <path class="filament"
+        d="M72 145 L81 171 M108 145 L99 171"/>
+
+    </svg>
+
+    <button class="pull" id="switch"
+            aria-label="Toggle light">
+        <span class="string"></span>
+        <span class="knob"></span>
+    </button>
+
+    <div class="hint">Pull the switch to toggle the light</div>
+
+</div>
+
+<script>
+const switchButton = document.getElementById("switch");
+
+switchButton.addEventListener("click", function () {
+    document.body.classList.toggle("off");
+    document.body.classList.toggle("on");
+});
+</script>
+
+</body>
+</html>
